@@ -40,4 +40,41 @@ public class Algoritmo
             }
         }
     }
+
+    // QuickSort público que usa un método auxiliar recursivo
+    public void QuickSort(int[] arr)
+    {
+        if (arr == null || arr.Length < 2) return;
+        QuickSortRec(arr, 0, arr.Length - 1);
+    }
+
+    private void QuickSortRec(int[] arr, int low, int high)
+    {
+        if (low >= high) return;
+
+        int pivotIndex = Partition(arr, low, high);
+        QuickSortRec(arr, low, pivotIndex - 1);
+        QuickSortRec(arr, pivotIndex + 1, high);
+    }
+
+    // Partición usando el esquema de Lomuto
+    private int Partition(int[] arr, int low, int high)
+    {
+        int pivot = arr[high];
+        int i = low;
+        for (int j = low; j < high; j++)
+        {
+            if (arr[j] < pivot)
+            {
+                int tmp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = tmp;
+                i++;
+            }
+        }
+        int tmp2 = arr[i];
+        arr[i] = arr[high];
+        arr[high] = tmp2;
+        return i;
+    }
 }
